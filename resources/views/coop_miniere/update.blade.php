@@ -24,8 +24,8 @@
                                     <div class="form-group row">
                                         <label for="nom" class="col-sm-3 col-form-label">Nom </label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="nom" value="{{ $mine->nom }}" class="form-control"
-                                                id="nom" placeholder="Inserer le nom" required>
+                                            <input type="text" name="nom" value="{{ $mine->nom }}"
+                                                class="form-control" id="nom" placeholder="Inserer le nom" required>
                                             @error('nom')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -37,10 +37,13 @@
                                         <label for="categorisation" class="col-sm-3 col-form-label">Categorisation</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" name="categorisation" required>
-                                                <option selected disabled value="">Selectionner une categorisation</option>
-                                                <option value="Coopérative Minière" @if ($mine->categorisation == 'Coopérative Minière') selected @endif>Coopérative
+                                                <option selected disabled value="">Selectionner une categorisation
+                                                </option>
+                                                <option value="Coopérative Minière"
+                                                    @if ($mine->categorisation == 'Coopérative Minière') selected @endif>Coopérative
                                                     Minière</option>
-                                                <option value="Exploitant artisanal" @if ($mine->categorisation == 'Exploitant artisanal') selected @endif>Exploitant
+                                                <option value="Exploitant artisanal"
+                                                    @if ($mine->categorisation == 'Exploitant artisanal') selected @endif>Exploitant
                                                     artisanal</option>
                                                 <option value="Creuseur">Creuseur</option>
                                             </select>
@@ -55,9 +58,9 @@
                                         <label for="serviceAgrement" class="col-sm-3 col-form-label">Service
                                             d'Agrement</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="serviceAgrement" value="{{ $mine->serviceAgrement }}"
-                                                class="form-control" id="serviceAgrement"
-                                                placeholder="Inserer le Service d'Agrement" required>
+                                            <input type="text" name="serviceAgrement"
+                                                value="{{ $mine->serviceAgrement }}" class="form-control"
+                                                id="serviceAgrement" placeholder="Inserer le Service d'Agrement" required>
                                             @error('serviceAgrement')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -82,7 +85,9 @@
                                     <div class="form-group row">
                                         <label for="domaine" class="col-sm-3 col-form-label">Domaine</label>
                                         <div class="col-sm-9">
-                                            young
+                                            <input type="text" name="domaine" value="{{ $mine->domaine }}"
+                                                class="form-control" id="phone" placeholder="Inserer le domaine"
+                                                required>
                                             @error('domaine')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -135,8 +140,8 @@
                                         <label for="email" class="col-sm-3 col-form-label">Adresse e-mail</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="email" value="{{ $mine->email }}"
-                                                class="form-control" id="email" placeholder="Inserer l'adresse e-mail"
-                                                required>
+                                                class="form-control" id="email"
+                                                placeholder="Inserer l'adresse e-mail" required>
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

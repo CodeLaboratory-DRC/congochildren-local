@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f0b92cd66c0aa90bec8b0b766c7b03f140de6f31',
+        'reference' => '63279957b4aa441001c410eb5c72ffc70182543c',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -526,7 +526,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f0b92cd66c0aa90bec8b0b766c7b03f140de6f31',
+            'reference' => '63279957b4aa441001c410eb5c72ffc70182543c',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -687,6 +687,15 @@
             'aliases' => array(),
             'reference' => '8b610eef8582ccdc05d8f2ab23305e2d37049461',
             'dev_requirement' => true,
+        ),
+        'openspout/openspout' => array(
+            'pretty_version' => 'v3.7.4',
+            'version' => '3.7.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../openspout/openspout',
+            'aliases' => array(),
+            'reference' => 'dfbbd53b5edcd486b45a37f6a04fac33073c70f3',
+            'dev_requirement' => false,
         ),
         'opis/closure' => array(
             'pretty_version' => '3.6.3',
@@ -937,8 +946,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1158,6 +1167,15 @@
             'install_path' => __DIR__ . '/../simplesoftwareio/simple-qrcode',
             'aliases' => array(),
             'reference' => '916db7948ca6772d54bb617259c768c9cdc8d537',
+            'dev_requirement' => false,
+        ),
+        'spatie/simple-excel' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/simple-excel',
+            'aliases' => array(),
+            'reference' => '59577197be5ac25e69948a8148a62e3fefc06586',
             'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(

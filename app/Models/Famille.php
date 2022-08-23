@@ -50,6 +50,21 @@ class Famille extends Model
             ->count();
     }
 
+    public static function countType($province)
+    {
+        return (DB::table('familles')->select('familles.nom_mere')
+            ->join('enfants', 'familles.enfant_id', 'enfants.id')
+            ->join('scolarites', 'enfants.id', 'scolarites.enfant_id')
+            ->join('sites', 'sites.id', 'enfants.site_id')
+            ->where('enfants.is_deleted', false)
+            ->where('enfants.age', '<=', 17)
+            ->where('scolarites.etude', false)
+            ->where('sites.province', $province)
+            ->groupBy('enfants.nom', 'enfants.age', 'enfants.rang_famille')
+            ->get())->unique('nom_mere')->count();
+    }
+
+
     public static function countLocal($province)
     {
         return (DB::table('familles')->select('familles.nom_mere')

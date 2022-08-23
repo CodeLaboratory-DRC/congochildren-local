@@ -52,22 +52,23 @@
                             </thead>
                             <tbody>
                                 @if ($children->isNotEmpty())
-                                    @foreach ($children as $child)
-                                        <tr>
-                                            <td>0114{{ $child->id }}</td>
-                                            <td  style="white-space: normal !important;">{{ $child->nom }}</td>
-                                            <td>{{ $child->age }}ans</td>
-                                            <td>{{ $child->genre == 'm' ? 'Masculin' : 'Feminin' }}</td>
-                                            <td>
-                                                {{ App\Models\User::getName($child->user_id) }}
-                                            </td>
-                                            <td>
-                                                <div class="btn-group" role="group" aria-label="Action Frais">
-                                                    <a href='{{ url("children/$child->id/fiche") }}'
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="ti-file">Détails</i>
-                                                    </a>
-													{{-- <a href='{{ url("children/$child->id/update") }}'
+                                    @foreach ($children->chunk(100) as $item)
+                                        @foreach ($item as $child)
+                                            <tr>
+                                                <td>0114{{ $child->id }}</td>
+                                                <td style="white-space: normal !important;">{{ $child->nom }}</td>
+                                                <td>{{ $child->age }}ans</td>
+                                                <td>{{ $child->genre == 'm' ? 'Masculin' : 'Feminin' }}</td>
+                                                <td>
+                                                    {{ App\Models\User::getName($child->user_id) }}
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="Action Frais">
+                                                        <a href='{{ url("children/$child->id/fiche") }}'
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="ti-file">Détails</i>
+                                                        </a>
+                                                        {{-- <a href='{{ url("children/$child->id/update") }}'
                                                         class="btn btn-sm btn-warning">
                                                         <i class="ti-pencil-alt text-white"> Modifier</i>
                                                     </a>
@@ -75,9 +76,10 @@
                                                         class="btn btn-sm btn-danger">
                                                         <i class="ti-trash text-white"> Supprimer</i>
                                                     </a> --}}
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
                                 @else
                                     <div class="alert alert-info text-center" alt="alert">

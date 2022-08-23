@@ -40,4 +40,27 @@ class DashboardController extends Controller
             'fournisseur' => $fournisseur,
         ];
     }
+
+    public function test($province)
+    {
+        $enfants = Enfant::select(
+            'enfants.id',
+            'enfants.nom',
+            'enfants.age',
+            'enfants.genre',
+            'enfants.adresse',
+            'enfants.parent_vie',
+            'enfants.deplace',
+            'enfants.habitation',
+            'enfants.rang_famille',
+            'enfants.site_id',
+            'enfants.user_id'
+        )
+            ->join('familles', 'enfants.id', 'familles.enfant_id')
+            ->join('scolarites', 'enfants.id', 'scolarites.enfant_id')
+            ->join('enquetes', 'enfants.id', 'enquetes.enfant_id')
+            ->where('age', '<', 18)
+            ->where('is_deleted', false)
+            ->groupBy('enfants.nom', 'enfants.age', 'enfants.rang_famille');
+    }
 }

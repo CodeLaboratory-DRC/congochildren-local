@@ -25,9 +25,14 @@ class PrintController extends Controller
             'enfants.age',
             'enfants.genre',
             'enfants.adresse',
+            'enfants.contact_princ',
+            'enfants.contact_sec',
             'sites.nom as nomSite',
-            'sites.province'
+            'sites.province',
+            'familles.nom_pere',
+            'familles.nom_mere',
         )->join('sites', 'sites.id', 'enfants.site_id')
+            ->join('familles', 'enfants.id', 'familles.enfant_id')
             ->where('enfants.id', $id)
             ->first();
 
@@ -166,9 +171,14 @@ class PrintController extends Controller
             'enfants.age',
             'enfants.genre',
             'enfants.adresse',
+            'enfants.contact_princ',
+            'enfants.contact_sec',
             'sites.nom as nomSite',
-            'sites.province'
+            'sites.province',
+            'familles.nom_pere',
+            'familles.nom_mere',
         )->join('sites', 'sites.id', 'enfants.site_id')
+            ->join('familles', 'enfants.id', 'familles.enfant_id')
             ->where('enfants.is_deleted', false)
             ->groupBy('enfants.nom', 'enfants.age', 'enfants.genre', 'enfants.rang_famille')
             ->orderBy('enfants.id', 'asc')
@@ -176,13 +186,12 @@ class PrintController extends Controller
 
         if ($children->isNotEmpty()) {
             // generate children card
-            $i =0;
+            $i = 0;
             foreach ($children as $child) {
                 if ($i < 10) {
                     $i++;
                     $this->cardPrint($child->id, true);
-                }
-                else{
+                } else {
                     return $this->archive();
                 }
             }

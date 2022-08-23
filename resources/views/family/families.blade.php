@@ -74,6 +74,7 @@
                                 @endif
                             </tbody>
                         </table>
+                        {{ $families->links('vendor.pagination.custom') }}
                     </div>
                 </div>
             </div>

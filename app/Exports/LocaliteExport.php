@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Localite;
+use App\Models\Site;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class LocaliteExport implements FromCollection
@@ -12,6 +12,6 @@ class LocaliteExport implements FromCollection
     */
     public function collection()
     {
-        return Localite::all();
+        return Site::all();
     }
 }

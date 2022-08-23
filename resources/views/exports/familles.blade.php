@@ -15,28 +15,29 @@
                 <th>ACTIVITE SECONDAIRE</th>
                 <th>REVENU PAR JOUR</th>
                 <th>NOMBRE D'ENFANTS DANS LA MINE</th>
-            </tr> 
+                <th>SITE</th>
+            </tr>
         </thead>
         <tbody>
-            @foreach($families as $family)
-                <tr>
-                    <td>{{ $family->nom_pere }}</td>
-                    <td>{{ $family->nom_mere }}</td>
-                    <td>{{ $family->matrimonial }}</td>
-                    <td>{{ $family->instruction_pere }}</td>
-                    <td>{{ $family->instruction_mere }}</td>
-                    <td>{{ $family->nb_enfant }}</td>
-                    <td>{{ $family->nb_homme }}</td>
-                    <td>{{ $family->nb_femme }}</td>
-                    <td>{{ $family->activite_princ }}</td>
-                    <td>{{ $family->activite_sec }}</td>
-                    <td>{{ $family->revenu_jour }}</td>
-                    <td>{{ $family->nb_enfant_mine }}</td>
-
-
-                </tr>
+            @foreach ($families->chunk(100) as $item)
+                @foreach ($item as $family)
+                    <tr>
+                        <td>{{ $family->nom_pere }}</td>
+                        <td>{{ $family->nom_mere }}</td>
+                        <td>{{ $family->matrimonial }}</td>
+                        <td>{{ $family->instruction_pere }}</td>
+                        <td>{{ $family->instruction_mere }}</td>
+                        <td>{{ $family->nb_enfant }}</td>
+                        <td>{{ $family->nb_homme }}</td>
+                        <td>{{ $family->nb_femme }}</td>
+                        <td>{{ $family->activite_princ }}</td>
+                        <td>{{ $family->activite_sec }}</td>
+                        <td>{{ $family->revenu_jour }}</td>
+                        <td>{{ $family->nb_enfant_mine }}</td>
+                        <td>{{ $family->nomSite }}</td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>
 @endsection
-

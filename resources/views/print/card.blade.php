@@ -32,7 +32,7 @@
 
 <body>
     <div class="container">
-        <div class="row" style="margin-top: 60px">
+        <div class="row" style="margin-top: 40px">
             <div class="col-md-4">
                 {{-- <img src="https://apple.kongochildren.org/api/image/{{ $data->id }}" alt="Image child"
                     style="width:150px; height: 150px; border-radius: 25% 10%;"> --}}

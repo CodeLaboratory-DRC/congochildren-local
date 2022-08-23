@@ -51,8 +51,9 @@ class ChildExport implements FromView
                 ->join('enquetes', 'enfants.id', 'enquetes.enfant_id')
                 ->where('age', '<', 18)
                 ->where('enfants.is_deleted', '=', false)
+                ->groupBy('enfants.nom', 'enfants.age', 'enfants.rang_famille')
+                ->orderBy('enfants.nom')
                 ->get()
         ]);
     }
-    
 }

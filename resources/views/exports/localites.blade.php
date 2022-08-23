@@ -10,19 +10,16 @@
                 <th><b>PROVINCE</b></th>
                 <th><b>TERRITOIRE</b></th>
                 <th><b>NOMBRE DES SITES</b></th>
-            </tr> 
+            </tr>
         </thead>
         <tbody>
-            @foreach($sites as $site)
+            @foreach ($sites->unique('localite') as $localite)
                 <tr>
-                    <td>{{ $site->nom }}</td>
-                    <td>{{ $site->province }}</td>
-                    <td>{{ $site->territoire }}</td>
-                    <td>{{ $intitule = App\Models\Site::countByLocalite($localite->id)  }}</td>
-                    
-                </tr>
+                    <td>{{ $localite->localite }}</td>
+                    <td>{{ $localite->province }}</td>
+                    <td>{{ $localite->territoire }}</td>
+                    <td>{{ App\Models\Site::countByLocalite($localite->localite) }}</td>
             @endforeach
         </tbody>
     </table>
 @endsection
-

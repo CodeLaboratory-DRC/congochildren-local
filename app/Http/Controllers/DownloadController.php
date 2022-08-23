@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Famille;
 use App\Models\Miniere;
 use App\Models\Localite;
+use App\Models\Source;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\File;
@@ -25,9 +26,14 @@ class DownloadController extends Controller
             'enfants.age',
             'enfants.genre',
             'enfants.adresse',
+            'enfants.contact_princ',
+            'enfants.contact_sec',
             'sites.nom as nomSite',
-            'sites.province'
+            'sites.province',
+            'familles.nom_pere',
+            'familles.nom_mere',
         )->join('sites', 'sites.id', 'enfants.site_id')
+            ->join('familles', 'enfants.id', 'familles.enfant_id')
             ->where('enfants.id', $id)
             ->first();
 
@@ -60,9 +66,14 @@ class DownloadController extends Controller
             'enfants.age',
             'enfants.genre',
             'enfants.adresse',
+            'enfants.contact_princ',
+            'enfants.contact_sec',
             'sites.nom as nomSite',
-            'sites.province'
+            'sites.province',
+            'familles.nom_pere',
+            'familles.nom_mere',
         )->join('sites', 'sites.id', 'enfants.site_id')
+            ->join('familles', 'enfants.id', 'familles.enfant_id')
             ->where('enfants.is_deleted', false)
             ->where('sites.localite', $localite)
             ->groupBy('enfants.nom', 'enfants.age', 'enfants.genre', 'enfants.rang_famille')
@@ -107,5 +118,58 @@ class DownloadController extends Controller
             QrCode::size(200)->generate(URL::to('/') . '/api/identify/' . $child->id, $path);
         }
         return true;
+    }
+
+
+
+
+    public function exportCardBySource($part = 1)
+    {
+        $begin = ($part - 1) * 100;
+        $childrens = [];
+        $sources = Source::select('enfant_id')
+            ->orderBy('enfant_id', 'asc')
+            ->skip($begin)->take(100)
+            ->get();
+
+
+        foreach ($sources as $value) {
+            if ($value->enfant_id) {
+                $children = Enfant::select(
+                    'enfants.id',
+                    'enfants.nom',
+                    'enfants.age',
+                    'enfants.genre',
+                    'enfants.adresse',
+                    'enfants.contact_princ',
+                    'enfants.contact_sec',
+                    'sites.nom as nomSite',
+                    'sites.province',
+                    'familles.nom_pere',
+                    'familles.nom_mere',
+                )->join('sites', 'sites.id', 'enfants.site_id')
+                    ->join('familles', 'enfants.id', 'familles.enfant_id')
+                    ->where('enfants.is_deleted', false)
+                    ->where('enfants.id', $value->enfant_id)
+                    ->orderBy('enfants.id', 'asc')
+                    ->get();
+
+                if ($children->isNotEmpty()) {
+                    array_push($childrens, $children);
+                }
+            }
+        }
+
+        if (!empty($childrens)) {
+            // generate children card
+            $card = [];
+            foreach ($childrens as $child) {
+                array_push($card, $this->cardPrint($child[0]->id));
+            }
+            // generate and download zip folder contain all card
+            return $this->archive($card);
+        } else {
+            return 'aucune donnees a exporter';
+        }
     }
 }

@@ -18,7 +18,9 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        $families = Famille::all();
+        $families = Famille::orderBy('nom_mere')
+            ->groupBy('familles.nom_mere')
+            ->paginate(50);
 
         return view('family.families', compact('families'));
     }
@@ -70,9 +72,9 @@ class FamilyController extends Controller
             'sites.nom as nomSite'
 
         )->join('enfants', 'enfants.id', 'familles.enfant_id')
-        ->join('sites', 'sites.id', 'enfants.site_id')
-        ->where('familles.id', $id)
-        ->first();
+            ->join('sites', 'sites.id', 'enfants.site_id')
+            ->where('familles.id', $id)
+            ->first();
     }
     /**
      * Display the specified resource.
@@ -85,7 +87,7 @@ class FamilyController extends Controller
         $family = $this->getOne($id);
 
         if ($family != null) {
-            $child = Enfant::select('enfants.id','enfants.genre','enfants.age', 'enfants.nom','scolarites.etude','scolarites.niveauEtude')
+            $child = Enfant::select('enfants.id', 'enfants.genre', 'enfants.age', 'enfants.nom', 'scolarites.etude', 'scolarites.niveauEtude')
                 ->join('familles', 'enfants.id', 'familles.enfant_id')
                 ->join('scolarites', 'enfants.id', 'scolarites.enfant_id')
                 ->where('familles.nom_pere', $family->nom_pere)
@@ -105,11 +107,11 @@ class FamilyController extends Controller
      */
     public function edit($id)
     {
-        $family = Famille::findBy('familles.enfant_id',$id);
+        $family = Famille::findBy('familles.enfant_id', $id);
         $jeune = Enfant::find($id);
         $freres = Frere::where('famille_id', $family->id)->get();
 
-        return view('family.update', compact('family', 'jeune','freres'));
+        return view('family.update', compact('family', 'jeune', 'freres'));
     }
 
     /**

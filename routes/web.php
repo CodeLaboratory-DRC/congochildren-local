@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use App\Models\Enfant;
+use App\Models\Famille;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
@@ -9,20 +13,20 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\YoungController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\EnqueteController;
 use App\Http\Controllers\MiniereController;
 use App\Http\Controllers\AgricoleController;
 use App\Http\Controllers\ChildrenController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LocaliteController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ScolariteController;
 use App\Http\Controllers\MiningZoneController;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\AgrobusinessController;
-use App\Http\Controllers\EnqueteController;
+use App\Http\Controllers\SourceImportController;
 use App\Http\Controllers\OuvrageCommunautaireController;
-use App\Http\Controllers\ScolariteController;
-use App\Http\Controllers\DownloadController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +38,12 @@ use App\Http\Controllers\DownloadController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('stats', function () {
+    dd(Famille::countType('lualaba'));
+});
+
+
 
 Route::get('login', function () {
     return view('auth.login');
@@ -197,3 +207,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('card/localite/{localite}/part/{part}/download', [DownloadController::class, 'exportCardByLocalite'])->name('card.downpart');
 });
+
+// exportation
+Route::get('source/import', function () {
+    return view('source.import');
+});
+
+// Importer un fichier Excel
+Route::post("source/import", [SourceImportController::class, 'import'])->name('source.import');
+
+Route::get('source/export', [SourceImportController::class, 'updateData']);
+
+Route::get('source/list', [SourceImportController::class, 'showList']);
+
+
+Route::get('special/card/{part}/download', [DownloadController::class, 'exportCardBySource'])->name('special.downpart');

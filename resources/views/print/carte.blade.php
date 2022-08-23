@@ -18,19 +18,19 @@
 
         div.page {
             position: relative;
-            top: 210px;
+            top: 200px;
         }
 
         .qrcode {
             position: absolute;
             right: 20;
-            bottom: 200;
+            bottom: 160;
         }
 
         #block_container {
             display: flex;
             justify-content: ;
-            margin-left: 150px;
+            margin-left: 50px;
         }
 
         #bloc1 {
@@ -40,21 +40,20 @@
 
         #bloc2 {
             margin-left: 250px;
-            width: 700px;
-            font-size: 45px;
+            width: 650px;
+            font-size: 35px;
         }
 
 
         span {
             color: white;
         }
-
     </style>
 </head>
 
 {{-- <body background="{{ asset('carte/CarteRectoV1.png') }}"> --}}
 
-<body background="{{ public_path('carte/CarteRectoV1.png') }}">
+<body background="{{ public_path('carte/Carte-Recto-v3.png') }}">
     <div class="page">
         <div id="block_container">
             <div class="image-child" id="bloc1">
@@ -81,6 +80,9 @@
                 <span>Nom: {{ $data->nom }}</span><br>
                 <span>Age: {{ $data->age }} Ans</span><br>
                 <span>Genre: {{ $data->genre == 'm' ? 'Masculin' : 'Feminin' }}</span><br>
+                <span>Pere: {{ $data->nom_pere }}</span><br>
+                <span>Mere: {{ $data->nom_mere }}</span><br>
+                <span>Contact(s): {{ $data->contact_princ }} - {{ $data->contact_sec }}</span><br>
                 <span>Site: {{ $data->nomSite }}</span><br>
                 <span>Province: {{ $data->province }}</span>
             </div>

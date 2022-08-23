@@ -57,6 +57,20 @@ class Enfant extends Model
         }
     }
 
+    // public static function countType($province)
+    // {
+    //     return (DB::table('enfants')->select('enfants.nom', 'enfants.age', 'enfants.rang_famille')
+    //         ->join('scolarites', 'enfants.id', 'scolarites.enfant_id')
+    //         ->join('sites', 'sites.id', 'enfants.site_id')
+    //         ->where('enfants.is_deleted', '=', false)
+    //         ->where('age', '>', 17)
+    //         ->where('scolarites.chargeFrais', 'Soi même')
+    //         ->where('sites.province', $province)
+    //         ->groupBy('enfants.nom', 'enfants.age', 'enfants.rang_famille')
+    //         ->get())->count();
+    // }
+
+
     public static function countLocal($type = null, $province)
     {
         if ($type == 'enfant') {

@@ -80,14 +80,25 @@
                                             production</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" name="capaciteProduction" required>
-                                                <option selected disabled value="">Selectionner une Capacité de production
-                                                </option>
-                                                <option>0 à 50 {{ $productionUnity }}</option>
-                                                <option>50 à 100 {{ $productionUnity }}</option>
-                                                <option>100 à 150 {{ $productionUnity }}</option>
-                                                <option>150 à 200 {{ $productionUnity }}</option>
-                                                <option>200 à 250 {{ $productionUnity }}</option>
-                                                <option>Plus de {{ $productionUnity }}</option>
+                                                <option disabled value="">Selectionner une Capacité de production</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == '0 à 50' ? 'selected' : '' }}>0 à
+                                                    50 {{ $productionUnity }}</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == '0 à 100' ? 'selected' : '' }}>50
+                                                    à 100{{ $productionUnity }}</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == '0 à 150' ? 'selected' : '' }}>
+                                                    100 à 150{{ $productionUnity }}</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == '0 à 200' ? 'selected' : '' }}>
+                                                    150 à 200{{ $productionUnity }}</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == '0 à 250' ? 'selected' : '' }}>
+                                                    200 à 250{{ $productionUnity }}</option>
+                                                <option
+                                                    {{ $agricole->capaciteProduction == 'Plus de' ? 'selected' : '' }}>
+                                                    Plus de{{ $productionUnity }}</option>
                                             </select>
                                             @error('capaciteProduction')
                                                 <span class="invalid-feedback" role="alert">
@@ -102,9 +113,9 @@
                                             <label for="equipement" class="col-sm-3 col-form-label">Equipement de
                                                 production</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="equipement" value="{{ $agricole->equipement }}"
-                                                    class="form-control" id="equipement"
-                                                    placeholder="Inserer un equipement de production">
+                                                <input type="text" name="equipement"
+                                                    value="{{ $agricole->equipement }}" class="form-control"
+                                                    id="equipement" placeholder="Inserer un equipement de production">
                                                 @error('equipement')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -160,7 +171,8 @@
                                         <label for="email" class="col-sm-3 col-form-label">Adresse e-mail</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="email" value="{{ $agricole->email }}"
-                                                class="form-control" id="email" placeholder="Inserer l'adresse e-mail">
+                                                class="form-control" id="email"
+                                                placeholder="Inserer l'adresse e-mail">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
